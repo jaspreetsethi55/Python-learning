@@ -1,0 +1,12 @@
+#!/usr/bni/python3.4
+
+print("Am in my_module")
+
+var = 'This is test variable in my_module'
+
+def find_index(l,val):
+    for index,value in enumerate(l):
+        if(val == value):
+            return index
+
+    return -1

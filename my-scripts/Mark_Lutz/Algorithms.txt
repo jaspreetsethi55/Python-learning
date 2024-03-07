@@ -1,0 +1,15 @@
+##Algorithms##
+How to systematically perform tasks
+We write down sequence of steps needed to complate the task
+
+#What is a step ? Degree of detail that need to be provided with each step
+E.g. Suppose task is to 'Prepare a hall for function' and this can contain many steps:
+    1.Cleaning room
+    2. preparing stage
+    3. Arranging Chairs
+    4. etc
+
+But again these steps depends upon degree of detail provided. For e.g. 
+For an experienced team we can just say, 'arrange the chairs' and they will do it
+But for an un-experienced team, we might need to tell them, 'Arrange chairs in 8 X 10 rows'
+Thus, degree of details depends upon the subject experience(machine/language functionlity) 

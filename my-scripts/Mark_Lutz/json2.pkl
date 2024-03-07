@@ -1,0 +1,223 @@
+{
+      "instrument_id":19296285,
+      "master_information":{
+         "instrument_master":{
+            "apex_asset_type":7,
+            "apex_asset_type_descr":[ {'c':8},{'b':5},{'d':3},{'e':7}],
+            "child_issue_ind":'false',
+            "country_of_risk":"RU",
+            "eval_quotation_basis":1,
+            "eval_quotation_basis_descr":"Per Share",
+            "federal_tax_status":3,
+            "federal_tax_status_descr":"Taxable",
+            "instrument_status":1,
+            "instrument_status_descr":"Live",
+            "instrument_type":4,
+            "instrument_type_descr":"Equity",
+            "primary_currency_code":"USD",
+            "primary_exchange":"RUSX",
+            "primary_market_code":"MISX",
+            "primary_name":"RUB1(USD)",
+            "accrued_interest":{
+               "ex_div_date_ind":'false'
+            }
+         },
+         "instrument_xref":{
+            "bloomberg_symbology":[
+               {
+                  "bb_bsid":"",
+                  "bb_ticker":"KRPE",
+                  "bb_unique_id":"EQ0000000000321372",
+                  "bbgid":"BBG000C6F229",
+                  "bbgid_composite":"BBG000C6F1T2",
+                  "exch_code":"RR",
+                  "id_bb_global_share_class_level":"BBG001SF3L67",
+                  "id_bb_sec_num":"KRPE",
+                  "market_sector":"Equity",
+                  "security_typ":"Common Stock",
+                  "security_typ2":""
+               },
+               {
+                  "bb_bsid":"",
+                  "bb_ticker":"KRPE",
+                  "bb_unique_id":"EQ0000000000321372",
+                  "bbgid":"BBG000C6F1T2",
+                  "bbgid_composite":"BBG000C6F1T2",
+                  "exch_code":"RU",
+                  "id_bb_global_share_class_level":"BBG001SF3L67",
+                  "id_bb_sec_num":"KRPE",
+                  "market_sector":"Equity",
+                  "security_typ":"Common Stock",
+                  "security_typ2":""
+               }
+            ],
+            "isin":"RU000A0JNZD9"
+         },
+         "market_master":{
+            "market":[
+               {
+                  "accrued_interest":{
+                     "ex_div_date_ind":'false'
+                  },
+                  "country_of_quotation":"RU",
+                  "currency_code":"USD",
+                  "id":15810722,
+                  "listing_trading_status":1,
+                  "mic":"RUSX",
+                  "never_priced_indicator":'false',
+                  "primary_market_ind":'true',
+                  "quotation_basis":"1",
+                  "quotation_basis_descr":"Per Share",
+                  "xref":{
+                     "analystics_id_type_id":"21",
+                     "cva_code_type_id":1,
+                     "idii_type_id":6,
+                     "quick_code_type_id":13,
+                     "rts_ticker_type_id":19,
+                     "sedol":"7217063",
+                     "sedol_type_id":3,
+                     "status":"Live",
+                     "status_id":1,
+                     "ticker":"KRPE",
+                     "ticker_type_id":17
+                  }
+               }
+            ]
+         },
+         "organization_master":{
+            "country_of_risk":"RU",
+            "org_country_code":"RU",
+            "organization_id":22110067,
+            "organization_status":6,
+            "organization_status_descr":"Live",
+            "organization_type":67,
+            "organization_type_descr":"Corporation",
+            "primary_name":"Krasny Perekop (Ya",
+            "business_entity":{
+               "issuer":{
+                  "address":[
+                     {
+                        "address1":"63 Ul Stachek",
+                        "type":"Mailing Address",
+                        "type_id":2
+                     },
+                     {
+                        "address1":"63 Ul Stachek",
+                        "city":"Yaroslavl",
+                        "country":"RU",
+                        "postal_code":"150002",
+                        "type":"Physical Address",
+                        "type_id":4
+                     }
+                  ],
+                  "bankruptcy_open_ind":'false',
+                  "business_registration_num":"1027600792559",
+                  "company_legal_form":"corporation",
+                  "out_of_business_ind":'false',
+                  "phone":"4852270836",
+                  "prev_registered_name":"Joint-Stock Company \"Yaroslavsk Combine of Technical Tissue\" Red Perekop \"",
+                  "publicly_traded_ind":'false',
+                  "registered_name":"Krasny Perekop, AO",
+                  "trade_style":"Oao \"Krasny Perekop\""
+               },
+               "parent":{
+                  "address":[
+                     {
+                        "address1":"63 Ul Stachek",
+                        "type_id":2
+                     },
+                     {
+                        "address1":"63 Ul Stachek",
+                        "city":"Yaroslavl",
+                        "country":"RU",
+                        "postal_code":"150002",
+                        "type":"Physical Address",
+                        "type_id":4
+                     }
+                  ],
+                  "bankruptcy_open_ind":'false',
+                  "business_registration_num":"1027600792558",
+                  "out_of_business_ind":'true',
+                  "phone":"4852270836",
+                  "prev_registered_name":"Joint-Stock Company \"Yaroslavsk Combine of Technical Tissue\" Red Perekop \"",
+                  "publicly_traded_ind":'false',
+                  "registered_name":"Krasny Perekop, AO",
+                  "trade_style":"Oao \"Krasny Perekop\""
+               },
+               "ultimate_parent":{
+                  "address":[
+                     {
+                        "address1":"63 Ul Stachek",
+                        "type":"Mailing Address",
+                        "type_id":2
+                     },
+                     {
+                        "address1":"63 Ul Stachek",
+                        "city":"Yaroslavl",
+                        "country":"RU",
+                        "postal_code":"150002",
+                        "type":"Physical Address",
+                        "type_id":4
+                     }
+                  ],
+                  "bankruptcy_open_ind":'false',
+                  "business_registration_num":"1027600792559",
+                  "company_legal_form":"corporation",
+                  "country_of_risk":"RU",
+                  "out_of_business_ind":'false',
+                  "phone":"4852270836",
+                  "prev_registered_name":"Joint-Stock Company \"Yaroslavsk Combine of Technical Tissue\" Red Perekop \"",
+                  "publicly_traded_ind":'false',
+                  "registered_name":"Krasny Perekop, AO",
+                  "trade_style":"Oao \"Krasny Perekop\""
+               }
+            },
+            "organization_xref":{
+               "issuer_duns":"357843346",
+               "parent_duns":"357843346",
+               "ult_parent_duns":"357843346"
+            }
+         }
+      },
+      "global_information":{
+         "country_information":{
+            "instrument_country_information":{
+               "country_code":"RU",
+               "holiday_schedule":"RU"
+            }
+         },
+         "organization_information":{
+            "classifications":{
+               "primary_naics_code":313210,
+               "sic_code":2211
+            }
+         }
+      },
+      "debt":{
+         "cmo_details":{
+            "factor_parent_ind":0
+         },
+         "fixed_income":{
+            "child_indicator":'false'
+         }
+      },
+      "equity":{
+         "equity_details":{
+            "capital_gains_tax_type":1,
+            "equity_type":1,
+            "equity_type_descr":"Common/Ordinary Stock",
+            "instrument_form":1,
+            "instrument_form_descr":"Registered",
+            "issued_capital_effective_date":"2001-09-21",
+            "par_value":1.000000,
+            "par_value_currency":"RUB",
+            "ptm_levy_flag":78,
+            "shares_beneficial_int_flag":'false',
+            "shares_outstanding":422851,
+            "shares_outstanding_effective_date":"2001-09-21",
+            "total_shares_outstanding_effective_date":"2001-09-21",
+            "voting_rights_code":4
+         }
+      }
+   }
+

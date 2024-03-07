@@ -1,0 +1,79 @@
+ey  Issue Type  QA Comments
+Aseem Monga Suresh Mynampati    In QA   
+Prashant Prasad Servgen - Look up asset class codes from SERVGEN.translation_lookup 740 - Add LMP Equities to One Product   ODS-17946   Story   
+Aseem Monga Suresh Mynampati    In QA   
+
+Servgen - Test LMP Provisioning restricts the universe data 740 - Add LMP Equities to One Product   ODS-17998   Story   dependent on readiness of front end to validate the data in files generated
+Aseem Monga Suresh Mynampati    In QA   
+
+Servgen - Populate MARKET_PORTFOLIO_GTT with Market id & Instrument id from Universes and Portfolios    740 - Add LMP Equities to One Product   ODS-17857   Story   unable to view the table MARKET_PORTFOLIO_GTT
+Aseem Monga Suresh Mynampati    In QA   
+
+Servgen - Implement JSON parsing for ref data fields    740 - Add LMP Equities to One Product   ODS-17968   Story   
+Aseem Monga Suresh Mynampati    In QA   
+
+Servgen - Populate SQLReport section for GTT Loads  740 - Add LMP Equities to One Product   ODS-17864   Story   Need more information related to scope of JIRA and DB tables involved
+Aseem Monga Suresh Mynampati    In QA   
+
+Servgen - Universe (commercial asset class) integration with OneProduct services    740 - Add LMP Equities to One Product   ODS-17492   Story   dependent on readiness of front end to validate the data in files generated
+Aseem Monga Tripti Jain In QA   
+
+Servgen - Add headers to service file   740 - Add LMP Equities to One Product   ODS-17491   Story   Need more details for content in file header
+Aseem Monga Tripti Jain In QA   
+
+Servgen - Add provisioning for products 740 - Add LMP Equities to One Product   ODS-17859   Story   
+Aseem Monga Tripti Jain In QA   
+
+Servgen - Integrate with new permission config changes  740 - Add LMP Equities to One Product   ODS-18039   Story   
+Aseem Monga Tripti Jain In QA   
+
+Servgen - Integrate with new fileformat json config changes 740 - Add LMP Equities to One Product   ODS-18038   Story   
+Aseem Monga Tripti Jain In QA   
+
+Maestro - Update existing CEP message listener to complete dependency for OneProduct subsystem  740 - Add LMP Equities to One Product   ODS-17839   Story   JIRA can be tested once UI schedule has been implemented.
+Aseem Monga Tripti Jain In QA   
+lovelina subudhi    Maestro - Add Eod Eval arrival batch event templates in Dev and QA  740 - Add LMP Equities to One Product   ODS-17860   Story   share the requirements on the timing of same
+Aseem Monga Tripti Jain In QA   
+
+Servgen - Permissioned attributes - Implementation  740 - Add LMP Equities to One Product   ODS-17899   Story   
+Aseem Monga Tripti Jain In QA   
+
+Maestro - Update existing EOD-evals message listener to complete dependency for OneProduct subsystem    740 - Add LMP Equities to One Product   ODS-17838   Story   JIRA can be tested once UI schedule has been implemented.
+Aseem Monga Peter Stark In QA   
+
+Ingestion - Setup event templates for Close sweeps  740 - Precap migration to OneProduct LMP    ODS-18110   Story   
+Aseem Monga Tripti Jain In QA   
+Prashant Prasad Servgen - Add footers in service file   740 - Add LMP Equities to One Product   ODS-17796   Story   Need more details for content in file footers
+Aseem Monga Suresh Mynampati    In QA   
+
+Servgen - Implement changes service 740 - Add LMP Equities to One Product   ODS-17921   Story   
+Aseem Monga Ekta Jaiswal    In QA   
+
+OneProduct LMP ingestion - Subscribe to E-789 dcode in Dev and QA   740 - Ingest CDF    ODS-17844   Story   Dev item
+Aseem Monga Ekta Jaiswal    In QA   0   Ekta Jaiswal    OneProduct LMP Ingestion - Analyse why some of the files were skipped and later completed for other times   740 - Ingest CDF    ODS-17816   Story   
+Aseem Monga Ekta Jaiswal    In QA   
+
+Ingestion - Clean up files - Dev and QA 740 - Ingest CDF    ODS-17907   Story   confirm on the requirements for file clean up
+Aseem Monga Ekta Jaiswal    In QA   
+
+OneProduct LMP - Performance analysis   740 - Ingest CDF    ODS-17976   Story   
+Aseem Monga Peter Stark In QA   
+
+CDF Ingestion - End to end orchestration of Triggered sweeps - Late/Close/Last  740 - Ingest CDF    ODS-17458   Story   
+Aseem Monga Peter Stark In QA   
+
+CDF - End to end orchestration of a timed sweep 740 - Ingest CDF    ODS-17454   Story   
+Aseem Monga Peter Stark In QA   
+
+Database - Stored proc - Sweeps by date (product history)   740 - Precap migration to OneProduct LMP    ODS-17902   Story   
+Aseem Monga Peter Stark In QA   
+
+Triggered sweeps - ingest close/late/last as separate sweeps for each 'key' 740 - Ingest CDF    ODS-17877   Story   
+Aseem Monga Peter Stark In QA   
+
+Database - One Product Ingestion - Update Triggered sweep stored proc logic to use file name instead of exchange id 740 - Precap migration to OneProduct LMP    ODS-17978   Story   
+Aseem Monga Ekta Jaiswal    In QA   
+Peter Stark OneProduct LMP Ingestion - Update start/stop script for deployment - Dev and QA 740 - Ingest CDF    ODS-17906   Story   
+Aseem Monga Ekta Jaiswal    In QA   
+
+OneProduct LMP ingestion - Subscribe to E-789 dcode in PT   740 - Ingest CDF    ODS-17845
