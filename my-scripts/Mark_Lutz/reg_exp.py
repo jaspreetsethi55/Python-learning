@@ -9,6 +9,8 @@ Note: If you want to locate a match anywhere in string, use search() instead.
 
 
 ####re.search searches the entire string, as the documentation says:
+--use re.search() to search for a particular pattern inside a string.
+--returns an object called MatchObject that stores different groups of data.This is because there might be matches inside other matches, and re.search() returns every possible result
 
 Scan through string looking for a location where the regular expression pattern produces a match, and return a corresponding MatchObject instance. Return None if no position in the string matches the pattern; note that this is different from finding a zero-length match at some point in the string.
 
@@ -84,5 +86,47 @@ print(re.search(r'\d(\d)',my_str).group()) #45 #will return error if not matched
 print(re.search(r'\d(\d)',my_str).groups()) #(5,) #will return empty tuple of not matched
 
 ########findall######
+#first argument of re.findall() is the regular expression that you want to match, and the second argument is the string to test.
+#if no match is found, then .findall() returns an empty list
+#Pattern matching is case sensitive. If you want to match this pattern regardless of the case, then you can pass a third argument with the value re.IGNORECASE:
+
+match = re.findall("ab*c", "abcd")
+#['abc']
+
+match = re.findall("ab*c", "acc")
+#['ac']
+
+match = re.findall("ab*c", "abcac")
+#['abc', 'ac']
+
+match = re.findall("ab*c", "abdc")
+#[]
+
+match = re.findall("ab*c", "ABC")
+#[]
+
+match = re.findall("ab*c", "ABC", re.IGNORECASE)
+#['ABC']
+
 match = re.findall(r'\d\d',my_str)
 print(match)
+
+
+######sub#####
+# re.sub(), which is short for substitute, allows you to replace the text in a string that matches a regular expression with new text. It behaves sort of like the .replace() string method.
+#The arguments passed to re.sub() are the regular expression, followed by the replacement text, followed by the string
+
+string = "Everything is <replaced> if it's in <tags>."
+string = re.sub("<.*>", "ELEPHANTS", string)
+print(string)
+#'Everything is ELEPHANTS.'
+
+#re.sub() uses the regular expression "<.*>" to find and replace everything between the first < and the last >, which spans from the beginning of <replaced> to the end of <tags>. This is because Python’s regular expressions are greedy, meaning they try to find the longest possible match when characters like * are used.
+
+#Alternatively, you can use the non-greedy matching pattern *?, which works the same way as * except that it matches the shortest possible string of text
+string = "Everything is <replaced> if it's in <tags>."
+string = re.sub("<.*?>", "ELEPHANTS", string)
+print(string)
+#"Everything is ELEPHANTS if it's in ELEPHANTS."
+
+
