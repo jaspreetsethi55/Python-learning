@@ -1,0 +1,95 @@
+{
+    "modulesContent": {
+        "$edgeAgent": {
+            "properties.desired": {
+                "schemaVersion": "1.1",
+                "runtime": {
+                    "type": "docker",
+                    "settings": {
+                        "registryCredentials": {
+                            "iotacr": {
+                                "address": "iotdevacr.azurecr.io",
+                                "password": "ix/POSkMm0tQFVh6e/P3SlxF5/S5QNZVqkp6dVF/9k+ACRBscgi/",
+                                "username": "iotdevacr"
+                            }
+                        }
+                    }
+                },
+                "systemModules": {
+                    "edgeAgent": {
+                        "settings": {
+                            "image": "mcr.microsoft.com/azureiotedge-agent:1.4"
+                        },
+                        "type": "docker"
+                    },
+                    "edgeHub": {
+                        "restartPolicy": "always",
+                        "settings": {
+                            "image": "mcr.microsoft.com/azureiotedge-hub:1.4",
+                            "createOptions": "{\"HostConfig\":{\"PortBindings\":{\"443/tcp\":[{\"HostPort\":\"443\"}],\"5671/tcp\":[{\"HostPort\":\"5671\"}],\"8883/tcp\":[{\"HostPort\":\"8883\"}]}}}"
+                        },
+                        "status": "running",
+                        "type": "docker"
+                    }
+                },
+                "modules": {
+                    "PlatformPluginModule": {
+                        "restartPolicy": "always",
+                        "settings": {
+                            "image": "iotdevacr.azurecr.io/platformpluginmodule:1.0.1-alpha-amd64"
+                        },
+                        "startupOrder": 1,
+                        "status": "running",
+                        "type": "docker"
+                    },
+                    "EIMC": {
+                        "env": {
+                            "STATS_HOST": {
+                                "value": "172.30.176.70"
+                            },
+                            "CACHE_TTL": {
+                                "value": "1200000"
+                            },
+                            "SERVER_PORT": {
+                                "value": "80"
+                            }
+                        },
+                        "restartPolicy": "always",
+                        "settings": {
+                            "image": "iotdevacr.azurecr.io/linux-amd64/edge-module-communicator:1.0.20",
+                            "createOptions": "{\"HostConfig\":{\"PortBindings\":{\"8080/tcp\":[{\"HostPort\":\"80\"}]}}}"
+                        },
+                        "startupOrder": 2,
+                        "status": "running",
+                        "type": "docker"
+                    }
+                }
+            }
+        },
+        "$edgeHub": {
+            "properties.desired": {
+                "schemaVersion": "1.1",
+                "storeAndForwardConfiguration": {
+                    "timeToLiveSecs": 7200
+                },
+                "routes": {
+                    "EIMCToPlatformPluginModule": {
+                        "route": "FROM /messages/modules/EIMC/outputs/eimcOutput INTO BrokeredEndpoint(\"/modules/PlatformPluginModule/inputs/ppm-inp\")"
+                    },
+                    "PlatformPluginModuleToEIMC": {
+                        "route": "FROM /messages/modules/PlatformPluginModule/outputs/ppm-output INTO BrokeredEndpoint(\"/modules/EIMC/inputs/eimcInput\")"
+                    },
+                    "PPMtoIoTHub": {
+                        "route": "FROM /messages/modules/PlatformPluginModule/outputs/ppm-register INTO $upstream"
+                    }
+                }
+            }
+        },
+        "PlatformPluginModule": {
+            "properties.desired": {}
+        },
+        "EIMC": {
+            "properties.desired": {}
+        }
+    }
+}
