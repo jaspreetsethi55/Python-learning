@@ -1,0 +1,21 @@
+##We can install docker from below link:
+https://docs.docker.com/engine/install/ubuntu/
+
+
+Usage: service docker {start|stop|restart|status}
+
+###Checking status of docker:
+service docker status
+
+###starting docker:
+service docker start
+
+###Stopping docker:
+service docker stop
+
+###Checking docker info:
+docker info
+
+###Checking docker version info(This will gove client and server version/api-version/etc. Usually client and server version are same):
+docker version
+

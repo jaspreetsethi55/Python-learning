@@ -1,0 +1,39 @@
+####Create/run a container
+"docker container run image-name command"
+E.g. docker container run ubuntu sleep 30 ---- This will create container and run it for 30 second.After 30 second we will come back to prompt.
+
+We can go to other terminal and see this via command "docker container ls"
+
+CONTAINER ID   IMAGE                                                              COMMAND                   CREATED         STATUS         PORTS    NAMES                  
+74fae92aa152   ubuntu                                                             "sleep 30"                3 seconds ago   Up 3 seconds            sweet_bell             
+
+####Stop a Container
+"docker container stop container-id/container-name"
+E.g. docker container stop 74fae92aa152
+E.g. docker container stop 74   -- will stop all containers whose container id is starting from 74
+
+
+####Start a container that is stopped
+"docker container start container-id/container-name"
+E.g. docker container start 74fae92aa152
+E.g. docker container start 74   -- will start all stopped containers whose container id is starting from 74
+
+####Deatch a container - create/run container in background
+"docker container run -d image-name command"
+E.g. docker container run -d ubuntu sleep 30  -- This will run this container in background and will give us the linux prompt immediately so we can do any other work.
+
+
+####Interactive - Create/run container in intearctive mode - go inside container
+"docker container run -it image-name command"
+
+E.g. jaspreet@NO2NEXXISCAREVM1:~/docker_learning$ docker container run -it ubuntu /bin/bash
+root@40d8c411eedf:/# ls       ---- Note this is inside docker, we can install anything inside it just like another linux server
+bin  boot  dev  etc  home  lib  lib32  lib64  libx32  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
+root@40d8c411eedf:/# exit    ---- exit - container will now be stopped & we'll come out of it. We can start it again and it will hv all softwares we installed.
+exit
+
+If we want to come out of container & want it to keep running then we can use "ctrl + p + q" instead of exit. 
+
+
+####Removing/Deleting all container's
+docker container rm $(docker container ls -aq)  -- -a gives stopped container as well, -q gives only container id's

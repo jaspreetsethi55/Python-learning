@@ -1,0 +1,59 @@
+##### Sample Dockerfile - build it via "docker image build myubuntu:10 ."
+FROM  ubuntu:16.04
+LABEL name="Jaspreet Sethi"  ##These labels are visible inside "Labels" key, when we inspect the image after build. "docker image inspect myubuntu:10"
+LABEL email="jaspreet_sethi5875@yahoo.co.in"
+ENV NAME Jaspreet  #This will create a new env variable "name" inside container with value "Jaspreet". "docker container run -it myubuntu:10", then run env command.
+ENV PASS Jas@123
+RUN pwd>/tmp/1stpwd.txt ##RUN is used to run any linux command inside docker container. value as "/"
+RUN cd /tmp
+RUN pwd>/tmp/2ndpwd.txt ##value as "/"
+WORKDIR /tmp ##similar to cd. changes the workdir in container.
+RUN pwd>/tmp/3rdpwd.txt ##value as "/tmp"
+RUN apt-get update && apt-get install -y openssh-server && apt-get install -y python ##installing ssh and python
+
+##Adding a new user
+RUN useradd -d /home/jaspreet -g root -G sudo -m -p $(echo "$PASS" | openssl passwd -l stdin) $NAME
+# -d /home/jaspreet --> user home directory path
+# -g root -G sudo --> adding user in groups
+# -p $(echo "$PASS" | openssl passwd -l stdin) --> password in encrypted form
+# $NAME (username) and $PASS(password) will be picked from env variables(as we have declared above)
+
+RUN whoami > /tmp/firstwhoami.txt ##By default all commands are run via root user, so we will see root user in /tmp/firstwhoami.txt.
+
+##switching user -- "USER" Command
+USER $NAME
+
+RUN whoami > /tmp/secondwhoami.txt
+
+RUN mkdir /tmp/testproject
+RUN touch /tmp/testproject/file1.txt
+RUN touch /tmp/testproject/file2.txt
+RUN mkdir -p /tmp/project1
+RUN mkdir -p /tmp/project2
+#COPY /tmp/1stpwd.txt 2ndpwd.txt
+ADD /tmp/testproject project2/
+CMD ["python"] ##CMD is basically used to run linux commands inside docker file. Usually only 1 CMD is there in 1 Dockerfile(although it can be more).
+               ##E.g. if we write below 2 CMD, then after going inside container, we will be getting an sh shell instead of python coz sh is last executed command:
+               #CMD ["python"]
+               #CMD ["sh"]
+
+When we execute and go inside container, we see that both files 1stpwd.txt and 2ndpwd.txt have same value "/" while we were expecting file 2ndpwd.txt to hve value "/tmp" as did "RUN cd /tmp" before it, but as per docker layer architechture each command runs on a different layer i.e. "RUN cd /tmp" runs on a container o a particular layer but when another command runs on a different layer it now goes to the root directory if the container, thus we see file 2ndpwd.txt value as "/".
+
+###ADD vs COPY
+COPY copies a file/directory from your host to your image.
+ADD copies a file/directory from your host to your image, but can also fetch remote URLs, extract TAR files, etc...
+Use COPY for simply copying files and/or directories into the build context.
+Use ADD for downloading remote resources, extracting TAR files, etc.
+Example 1:
+
+For COPY:
+COPY resources/jdk-7u79-linux-x64.tar.gz /tmp/
+RUN tar -zxvf /tmp/jdk-7u79-linux-x64.tar.gz -C /usr/local
+RUN rm /tmp/jdk-7u79-linux-x64.tar.gz
+
+For ADD:
+ADD resources/jdk-7u79-linux-x64.tar.gz /usr/local/
+
+Example 2:
+ADD https://github.com/Kitware/CMake/releases/download/v3.27.6/cmake-3.27.6-linux-x86_64.sh /tmp/cmake.sh
+                                                                                                                            

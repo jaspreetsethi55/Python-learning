@@ -1,0 +1,33 @@
+#####Saving a image
+"docker image save image-name > new-image-name.tar"
+
+Let us say we have a logstash image and we did some manual changes in its conf files and now we want to save it and give it to anyone, so that other person don't have to do manual changes. Then we can save it by using below command:
+E.g. "docker image save logstash > my_logstash.tar"
+
+"save" command saves all details/tags/versions of the image including history.
+E.g. if we have ubuntu image of multiple versions in out docker host and we use command:
+"docker image save ubuntu > my_ubuntu.tar"
+Above command will save all versions/tags of the ubuntu i.e. 14.04 , 20.04, etc which we are having in our docker host(our linux machine) will history of each i.e. even after loading the tar using "load" command "docker image ubuntu history" will show same output as before saving it i.e. it keeps everything intact.
+
+For saving specfic version, we can use specify it:
+"docker image save ubuntu:20.04 > my_ubuntu_20.04.tar"
+
+#####Loading a image from tar file
+"Docker image load < new-image-name.tar"
+
+Once image is saved in tar file using save command, the other person can load/extract the image from tar file using load command as below:
+E.g. "docker image load < my_logstash.tar"
+
+
+#####image save vs container export
+save command intact all image layers,versions,tags,history,etc(in short all image info)
+v/s
+export make image of running container and thus not having all layers,versions,history,etc. Its just has exact running container image i.e single layer.
+
+Note: Neither save nor export command store any volumne mount data in tar file
+
+
+######image load vs container import
+load stores all layers as defined in tar file via using "save" command
+vs
+import only re-stores single layer of that image.

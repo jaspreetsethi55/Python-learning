@@ -1,0 +1,83 @@
+####List all running containers
+"docker container ls"
+
+####List all containers - running + stopped
+"docker container ls -a"
+
+###Create container
+"docker container run image-name"
+"docker container run image-name command-to-run"
+E.g.
+"docker container run ubuntu" -- where ubuntu is image-name
+
+We can see if image is available or not via below:
+"docker image ls"
+
+if image is not available in DOCKER_HOST then docker engine will download the image from docker hub(REGISTERY) and will create its running instance.
+Once image in there in DOCKER_HOST under images, then next time if we need same image it will not download again from Registery and will directly get it from DOCKER_HOST 
+
+  ---Client---               --DOCKER_HOST---                  ---Registery (DOCKER_HUB)
+docker build |
+docker pull  | ---->      ---docker daemon---       ------>     nginx
+docker run   |                                                  elasticsearch
+			 -containers-     -Images-              centos
+			   cont-1    <---   ubuntu   <----      ubuntu
+                           cont-2           centos
+                           cont-3           
+
+
+####Running command in container via commandline
+#below example will run command "cat /etc/os-release" inside container "ubuntu"
+E.g.
+"docker container run ubuntu cat /etc/os-release"
+Output:
+'''
+jaspreet@NO2NEXXISCAREVM1:~$ docker container run ubuntu cat /etc/os-release
+PRETTY_NAME="Ubuntu 22.04.2 LTS"
+NAME="Ubuntu"
+VERSION_ID="22.04"
+VERSION="22.04.2 LTS (Jammy Jellyfish)"
+VERSION_CODENAME=jammy
+ID=ubuntu
+ID_LIKE=debian
+HOME_URL="https://www.ubuntu.com/"
+SUPPORT_URL="https://help.ubuntu.com/"
+BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
+PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
+UBUNTU_CODENAME=jammy
+'''
+
+Now, if we try to list container, we will still not see above container:
+"docker container ls"
+'''
+jaspreet@NO2NEXXISCAREVM1:~$ docker container ls
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+'''
+
+because command "docker container run ubuntu cat /etc/os-release" will just run the command 'cat /etc/os-release' in container and will the stop the container and come out of it.
+
+We can use option -a if we want to list even stopped containers
+"docker container ls -a"
+
+
+
+######Remove/Delete Container
+"docker container remove container-ids/container-names"
+
+Note: we cannot remove running containers
+E.g. We have below containers
+jaspreet@NO2NEXXISCAREVM1:~/GIT_MI0516-4228-nexxis-care-notification-service/nexxis-care-notification-service$ docker container ls
+CONTAINER ID   IMAGE     COMMAND      CREATED         STATUS         PORTS     NAMES
+2201f549e3bb   ubuntu    "sleep 30"   5 seconds ago   Up 5 seconds             relaxed_shaw
+
+"docker container remove container 2201f549e3bb"
+
+Above will give us below error:
+Error response from daemon: You cannot remove a running container adb89506a510d2cd84dd4163ac314136bba35f0c5cd16599dd3af0ed65e0c879. Stop the container before attempting removal or force remove
+
+
+We can also give partial container id:
+"docker container remove container 22"  --> this will remove all container whose id is starting from 22
+
+We can also give multiple id's to remove:
+docker container remove container 2201f549e3bb 21091y765ygf

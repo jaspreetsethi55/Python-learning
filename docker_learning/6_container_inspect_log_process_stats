@@ -1,0 +1,46 @@
+####Inspecting a container
+"docker container inspect container-id/name/id-prefix"
+
+This will return all container info E.g. All state, mount, Host,network settings(IP,port, etc), etc in json format.
+We'll be able to use this container IP on same virtual machine on which we are running this container, if we need to access it from outside world then we need to do port mapping.
+
+E.g. 
+1. run docker nginx container in background
+docker container run -d nginx
+
+2. list and get container id (54f2aa253f87)
+docker container ls 
+
+3. Inspect and get all container info
+docker container inspect 54f    
+
+4. if we use its IP (from aboce details) e.g. 172.17.2.1 on same virtual machine where docker containe is running -- This will open a nginx default web page. But this IP will not be accessbile from ooutside world, if we need to access it from outside world then we need to do port mapping.
+
+
+####Checking container logs
+"docker container logs container-id/name/id-prefix"
+
+
+####Checking processes running inside a container
+"docker container top container-id/name/id-prefix"
+
+pid, ppid running on container(which we can get via above command) can also be viewed on virtual-machine/linux-server on which docker is running which using linux based 
+"ps" command
+
+
+######checking stats of all running docker container
+"docker container stats"
+
+Output:
+CONTAINER ID   NAME                   CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O         PIDS
+54f2aa253f87   upbeat_zhukovsky       0.00%     5.934MiB / 11.69GiB   0.05%     3.77kB / 0B       102kB / 12.3kB    7
+59db05e92120   condescending_benz     0.00%     880KiB / 11.69GiB     0.01%     224kB / 0B        0B / 0B           1
+9ee985fb2b04   EIMC                   0.00%     134.1MiB / 11.69GiB   1.12%     40.5MB / 34.9MB   504kB / 29.1MB    37
+beadbb669cae   edgeHub                0.13%     183.1MiB / 11.69GiB   1.53%     71.9MB / 90.5MB   1.65MB / 86.4MB   37
+d560fa73094b   PlatformPluginModule   3.76%     8.18MiB / 11.69GiB    0.07%     55.1MB / 48MB     14.3MB / 438kB    6
+2343209fcfd4   edgeAgent              1.21%     73.32MiB / 11.69GiB   0.61%     45.8MB / 16.9MB   1.7MB / 58.3MB    28
+973d8de083c1   filebeat-filebeat-1    0.00%     41.96MiB / 11.69GiB   0.35%     458kB / 3.88kB    8.39MB / 244MB    3
+
+
+######checking stats of specific docker container
+"docker container stats container-id/name/id-prefix"

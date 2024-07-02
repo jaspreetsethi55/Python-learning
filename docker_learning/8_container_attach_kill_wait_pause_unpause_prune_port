@@ -1,0 +1,64 @@
+#####Attaching a containing runing in background 
+attach command connects our terminal to a running container
+
+"docker container attach container-id/id-prefix"
+
+E.g. First run nginx container in background
+"docker container run -d nginx"
+
+Now, if we want to connect to this container. For e.g. to see the logs it is getting, then we can use below command:
+"docker container attach 182"
+
+Note: open another terminal and get nginx ip via inspect and then once queried over browser, we;ll start seeing the logs in above command
+
+
+
+inspect and then once queried over browser, we;ll start seeing the logs in above command
+
+
+E.g. run ubuntu container in background interactively with /bin/bash shell
+"docker container run -itd ubuntu /bin/bash"
+
+Now, when we attach to this container:
+"docker container attach 55a" ----- This will take us inside container
+
+Now if we do "exit" to come outside from container, then this will actually kill the container "attach" command attaches to the existing process, and once we do exit, it wll end the current container process, while this is the not the case with "exec" command because exec basically spins up a new process inside the container.
+
+
+##########attach vs exec
+When you run an exec, it will basically spins up a new process inside the container whereas attach basically lets you attach to an existing process inside the container
+
+
+######Killing an container - will send SIGKILL signal to process and terminate it immidiately
+"docker container kill container-id/id-prefix"
+
+
+######Container Wait 
+"docker container wait container-id/id-prefix"
+
+This will wait for the container to stop and once containered is stooped then it will return the exit status of container
+
+E.g. "docker container wait 52f"
+
+open another terminal and stop container via "docker container stop 52f", now we'll see that above commmand will give us the exit status 0
+
+
+######Container pause 
+"docker container pause container-id/id-prefix"
+
+######Container unpause 
+"docker container unpause container-id/id-prefix"
+
+
+######Container prune - deleting all stopped/exited containers
+"docker container prune container-id/idprefix"
+
+
+######Container - see any port mapping/forwarding (if there)
+"docker container port container-id/idprefix"
+
+E.g. docker container port 8812
+8080/tcp -> 0.0.0.0:80
+8080/tcp -> [::]:80
+
+

@@ -1,0 +1,79 @@
+######List all images
+"docker image ls"
+or
+"docker images"
+
+#####List images with specific format header
+"docker image ls --format '{{header1}} seperator {{header2}} ...'
+
+E.g. "docker image ls --format '{{.ID}}, {{.Repository}}'"
+output:
+eea7b3dcba7e, nginx
+0be66ead4962, mcr.microsoft.com/azureiotedge-agent
+7e4fcce5e8c0, mcr.microsoft.com/azureiotedge-hub
+775980457ef4, mcr.microsoft.com/azureiotedge-hub
+1edb57509fb2, filebeat_filebeat
+a2e3cbb17783, mcr.microsoft.com/azureiotedge-diagnostics
+
+To know exactly what we need to provide in header columns below is the mapping:
+Placeholder    -     Description
+.ID            -     Image ID
+.Repository    -     Image repository
+.Tag           -     Image tag
+.Digest        -     Image digest
+.CreatedSince  -     Elapsed time since the image was created
+.CreatedAt     -     Time when the image was created
+.Size          -     Image disk size
+
+Note: in the same way we can also format docker container listing."dokcer container ls --format {{.....}} .. "
+
+#####Checking history of images
+"docker image history image-name"
+
+E.g. "docker image history ubuntu"
+output:
+IMAGE          CREATED        CREATED BY                                      SIZE      COMMENT
+08d22c0ceb15   6 months ago   /bin/sh -c #(nop)  CMD ["/bin/bash"]            0B
+<missing>      6 months ago   /bin/sh -c #(nop) ADD file:c8ef6447752cab254…   77.8MB
+<missing>      6 months ago   /bin/sh -c #(nop)  LABEL org.opencontainers.…   0B
+<missing>      6 months ago   /bin/sh -c #(nop)  LABEL org.opencontainers.…   0B
+<missing>      6 months ago   /bin/sh -c #(nop)  ARG LAUNCHPAD_BUILD_ARCH     0B
+<missing>      6 months ago   /bin/sh -c #(nop)  ARG RELEASE                  0B
+
+######Removing/deleting image
+"docker image rm image1 image2 ..."
+or
+"docker rmi image1 image2 ..."     -- rmi stands for remove image
+
+Note: we cannot remove image for which container is in running state.
+
+E.g. 
+jaspreet@NO2NEXXISCAREVM1:~$ docker image rm ubuntu
+Error response from daemon: conflict: unable to remove repository reference "ubuntu" (must force) - container 37361dcf2c18 is using its referenced image 08d22c0ceb15
+
+For removing images which container is in running we can use "-f" i.e. force option as below:
+"docker image rm -f ubuntu"
+
+
+######Removing/deleting image with specific version/tag
+"docker image rm image1:version image2 ..."
+or
+"docker rmi image1:version image2 ..."     -- rmi stands for remove image
+
+similarly use "-f" i.e. forcefully option for removing images for which container is running.
+
+E.g. "docker image rm ubuntu:14.04"
+
+
+########Inspecting image
+"docker image inspect image-name"
+
+Inspect gives us all image info(E.g. Stdin, StdOut, exposed ports, container, repo, env variables, volume, workdir, entrypoint, etc) in json format.
+
+
+#######Removing/deleting all unused(for which no container is running) images
+"docker image prune"
+
+
+
+

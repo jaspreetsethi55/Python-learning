@@ -1,0 +1,43 @@
+Virtual Machine:
+-------------VM--------------- E.g. Linux virtual machine
+VM1          VM2         VM3
+APP-A       APP-B        APP-C
+BIns/Libs   Bins/Libs    Bins/Libs
+GuestOS     GuestOS      GuestOS
+-----------Hypervisor--------- E.g. Oracle VM Virtual box manager
+----------Infrastructue------- E.g. Laptop
+
+Not light weight as everything needs to be attached to VM. E.g. sound driver, cards, etc
+In Short VM is itself a complete OS, so will take lot of RAM/memory-space. So we have to create seperate VM for each project/application.
+Each VM has its own kernel and OS.
+
+Container: Light weight
+------------CONTAINER---------
+Container1  Container2   Container3
+APP-A       APP-B        APP-C
+BIns/Libs   Bins/Libs    Bins/Libs
+------------Docker------------
+-----------Host OS------------
+----------Infrastructue-------
+
+In case of container, kernel will use the host OS
+
+###How container is build:
+Namespace technology is used to build container.
+Below names spaces are generated whenever a new container is build:
+1. pid(process) namespace get generated
+2. net(network interface) namespace gets generated
+3. ipc(inter process communication) namespace gets generated
+4. mount namespace gets generated
+5. uts(unix time sharing) namespace gets generated
+Then all these namespaces are wrapped in a container
+
+
+###Docker works on client-server architecture:
+server(docker daemon) <-- REST API <-- Client docker CLI <-- manages( network, image, data volumes, container)
+
+E.g. if we use command "docker image ls" , this will go to Rest API , fetches the data from docker daemon and gives us the output back via Rest API
+
+
+
+

@@ -1,6 +1,6 @@
 #!/usr/bin/python3.4
 
-#####while/else loops
+#####while/else and for/else loops
 #else statements are only not executed when break statement is executed(used and satisfied as per condintion) inside while loop
 #In all other conditions else condition will be executed.
 #Even when while loop condition is not fulfilled at all, even then else will be executed

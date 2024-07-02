@@ -1,0 +1,60 @@
+#########Creating a container and connecting to it via ssh
+#Sample Dockerfile - build it via "docker image build -t myubuntu:10 ."
+FROM  ubuntu:16.04
+ENV NAME Jaspreet
+ENV PASS Jas@123
+RUN mkdir -p /var/run/sshd
+RUN apt-get update
+RUN apt-get install -y openssh-server
+
+##Adding a new user
+RUN useradd -d /home/jaspreet -g root -G sudo -m -p $(echo "$PASS" | openssl passwd -1 -stdin) $NAME
+# -d /home/jaspreet --> user home directory path
+# -g root -G sudo --> adding user in groups
+# -p $(echo "$PASS" | openssl passwd -l stdin) --> password in encrypted form
+# $NAME (username) and $PASS(password) will be picked from env variables(as we have declared above)
+CMD ["/usr/sbin/sshd", "-D"]
+
+
+Connecting to above dockerfile container via ssh:
+#Build above docker file via "docker image build -t testsshubuntu:16.04  ."
+#Run container in background "docker container run -P -itd testsshubuntu:16.04"
+#Get container id: "docker container ls"
+#Inspect container and get ip address: "docker container inspect container-id"
+#now we can do "ssh Jaspreet@ipaddress" and then enter password "Jas@123" and then we will be connected to our docker container via ssh
+
+
+###################Exposing port for ssh container
+#if we run "docker container ls", we will get below output, we can clearly see that PORTS section not contain anything because we haven't exposed any port:
+
+jaspreet@NO2NEXXISCAREVM1:~/docker_learning$ docker container ls
+CONTAINER ID   IMAGE                 COMMAND               CREATED          STATUS          PORTS     NAMES
+d944ed1d0dad   testsshubuntu:16.04   "/usr/sbin/sshd -D"   14 minutes ago   Up 14 minutes             busy_vaughan
+
+#Sample Dockerfile - Now let us expose port 22
+FROM  ubuntu:16.04
+ENV NAME Jaspreet
+ENV PASS Jas@123
+RUN mkdir -p /var/run/sshd
+RUN apt-get update
+RUN apt-get install -y openssh-server
+
+##Adding a new user
+RUN useradd -d /home/jaspreet -g root -G sudo -m -p $(echo "$PASS" | openssl passwd -1 -stdin) $NAME
+EXPOSE 22  
+#EXPOSE 22 80 --> To expose multiple ports
+CMD ["/usr/sbin/sshd", "-D"]
+
+Sending ssh request to above dockerfile container via port with pur ip address i.e. port mapping:
+#Build above docker file via "docker image build -t testsshubuntu:16.04  ."
+#Run container in background "docker container run -P -itd testsshubuntu:16.04"
+#Get container id: "docker container ls"
+#Inspect container and get ip address: "docker container inspect container-id": see the PORT now 32768
+jaspreet@NO2NEXXISCAREVM1:~/docker_learning$ docker container ls
+CONTAINER ID   IMAGE                 COMMAND               CREATED          STATUS          PORTS                                     NAMES
+a1974216d914   testsshubuntu:16.04   "/usr/sbin/sshd -D"   3 seconds ago    Up 1 second     0.0.0.0:32768->22/tcp, :::32768->22/tcp   stupefied_robinson
+d944ed1d0dad   35ad10efa129          "/usr/sbin/sshd -D"   20 minutes ago   Up 20 minutes                                             busy_vaughan
+
+#now we can directly connect to this container via port mapping itself:
+#"ssh Jaspreet@10.98.0.167 -p 32768" and then enter password "Jas@123" and then we will be connected to our docker container via ssh port mapping
+

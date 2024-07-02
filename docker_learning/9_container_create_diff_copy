@@ -1,0 +1,51 @@
+######docker container create
+This will create a container but will not start it
+
+"docker container create image-name command"
+
+"E.g. docker container create ubuntu sleep 60" -- This will create ubuntu container(pull image if not there) with "sleep 60" command
+
+Now, we can use below start command to start this container:
+"docker container start 452f" -- where 452f is prefix of container id of above command
+
+
+######container create vs run
+create just creates a container and will not run it while "run" commands create as well as run a container
+
+######container diff
+"docker container diff container-id/id-prefix"
+
+This will give us the diff in actual image(we can see via "docker image ls") vs running/created image
+
+E.g. "docker container run -d ubuntu sleep 240" ----- let us say container id prefix is 75552
+now, run "docker container diff 75552"  -- this will not show any difference, as we have not made any changes in our running ubuntu image
+
+now, go inside container(via exec) and add/touch file 'a.txt' inside /tmp directory and create directory 'b' inside "/tmp" and we'll see the diff as follows:
+C /tmp   -->  Create: because we added a.txt under /tmp
+A /tmp/a.txt  --> Add: because we added a.txt under /tmp
+A /tmp/b --> Add: because we added directory under /tmp
+C /root --> Create: because we run command "sleep 140" and it created new new in root .bash_history
+A /root/.bash_history --> Add because we run command "sleep 140" and it created new new in root .bash_history
+
+Below is the completes process.
+
+jaspreet@NO2NEXXISCAREVM1:~$ docker container  run -d ubuntu sleep 240
+d3750e268eac8a539bc62063715cf97ef2fd22c61ad4a54e34da683a8a59f5d5
+jaspreet@NO2NEXXISCAREVM1:~$ docker container diff d37
+jaspreet@NO2NEXXISCAREVM1:~$ docker container exec -it d37 /bin/bash
+root@d3750e268eac:/# touch /tmp/a.txt
+root@d3750e268eac:/# mkdir /tmp/b
+root@d3750e268eac:/# exit
+exit
+jaspreet@NO2NEXXISCAREVM1:~$ docker container diff d37
+C /tmp
+A /tmp/a.txt
+A /tmp/b
+C /root
+A /root/.bash_history
+
+
+#######docker copy from local to container
+"docker container cp localpath container-id:container-path"
+
+E.g. "docker container cp test.txt d3750e268eac8a53:/tmp/

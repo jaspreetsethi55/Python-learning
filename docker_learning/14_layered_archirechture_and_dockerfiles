@@ -1,0 +1,121 @@
+#########Dockerfile
+Till now we were running individual docker command.
+Now, we will write docker commands and tasks in a single file, this file is known as Dockerfile.
+
+We should always use docker file name as "Dockerfile" else if we use any other name, then we need to define it via -f option when building image via docker file.
+
+"docker image build -t dockerfileubuntu:16.04 ."   --> . resembles that Dockerfile is in current directory
+"docker image build -t dockerfileubuntu:16.04 . -f mydockerfile" 
+
+####Sample Dockerfile 1
+FROM  ubuntu:16.04   --> Always write docker command keywords in capital letters(good practice), although even if we write in small we will not get any error.
+
+Now, let's see what all ubuntu image we current have, here myubuntu image is 16.04 itself
+jaspreet@NO2NEXXISCAREVM1:~/docker_learning$ docker image ls -a|grep -i ubuntu
+REPOSITORY                                                    TAG                                      IMAGE ID       CREATED         SIZE
+ubuntu                                                        latest                                   08d22c0ceb15   13 months ago   77.8MB
+myubuntu                                                      16.04                                    46b6402f6564   2 years ago     135MB
+
+Now let's save above in Dockerfile in this directtory and run below command to execute this Dockerfile:
+"docker image build -t dockerfileubuntu:16.04 ."
+
+Since we alread had ubuntu 16.04 in myubuntu, so new image is not downloaded, we can verify this as dockerfileubuntu and myubuntu have same image id.
+jaspreet@NO2NEXXISCAREVM1:~/docker_learning$ docker image ls -a|grep -i ubuntu
+REPOSITORY                                                    TAG                                      IMAGE ID       CREATED         SIZE
+ubuntu                                                        latest                                   08d22c0ceb15   13 months ago   77.8MB
+dockerfileubuntu                                              16.04                                    46b6402f6564   2 years ago     135MB
+myubuntu                                                      16.04                                    46b6402f6564   2 years ago     135MB
+ 
+
+########Sample Dockerfile 2
+#Dockerfile is a layered architecture i.e. at each and every step in below commands, a new layered in formed and stored by docker. 
+FROM  ubuntu:16.04
+RUN apt-get update && apt-get install -y tree
+RUN touch /tmp/1.txt
+RUN touch /tmp/2.txt
+RUN touch /tmp/3.txt
+RUN touch /tmp/4.txt
+RUN echo "My name is Jaspreet"
+RUN echo "My name is Jaspreet"
+RUN echo "My name is Jaspreet"
+RUN echo "My name is Jaspreet"
+
+save above in Dockerfile and run "docker image build -t dockerfileubuntu:16.04 .", we will get below output. 
+Output:
+[+] Building 4.8s (14/14) FINISHED                                                                                                                          docker:default
+ => [internal] load build definition from Dockerfile                                                                                                                  0.0s
+ => => transferring dockerfile: 312B                                                                                                                                  0.0s
+ => [internal] load .dockerignore                                                                                                                                     0.0s
+ => => transferring context: 2B                                                                                                                                       0.0s
+ => [internal] load metadata for docker.io/library/ubuntu:16.04                                                                                                       1.0s
+ => [ 1/10] FROM docker.io/library/ubuntu:16.04@sha256:1f1a2d56de1d604801a9671f301190704c25d604a416f59e03c04f5c6ffee0d6                                               0.0s
+ => CACHED [ 2/10] RUN apt-get update && apt-get install -y tree                                                                                                      0.0s
+ => [ 3/10] RUN touch /tmp/1.txt                                                                                                                                      0.4s
+ => [ 4/10] RUN touch /tmp/2.txt                                                                                                                                      0.5s
+ => [ 5/10] RUN touch /tmp/3.txt                                                                                                                                      0.5s
+ => [ 6/10] RUN touch /tmp/4.txt                                                                                                                                      0.4s
+ => [ 7/10] RUN echo "My name is Jaspreet"                                                                                                                            0.5s
+ => [ 8/10] RUN echo "My name is Jaspreet"                                                                                                                            0.4s
+ => [ 9/10] RUN echo "My name is Jaspreet"                                                                                                                            0.4s
+ => [10/10] RUN echo "My name is Jaspreet"                                                                                                                            0.5s
+ => exporting to image                                                                                                                                                0.2s
+ => => exporting layers                                                                                                                                               0.2s
+ => => writing image sha256:eb4a7adc22a0321e9ec628bb5bd64a8e18e7861eda42942b21efe522ce36d8d5                                                                          0.0s
+ => => naming to docker.io/library/dockerfileubuntu:16.04              
+
+Now, if we list all images, we can clear see dockerfileubuntu 16.04 is default image and rest all layers are created above it at each and every step.
+jaspreet@NO2NEXXISCAREVM1:~/docker_learning$ docker image ls -a|grep -i ubuntu
+REPOSITORY                                                    TAG                                      IMAGE ID       CREATED         SIZE
+ubuntu                                                        latest                                   08d22c0ceb15   13 months ago   77.8MB
+myubuntu                                                      16.04                                    46b6402f6564   2 years ago     135MB
+<none>                                                        <none>                                   7f39f2cec6e2   2 years ago        135MB
+<none>                                                        <none>                                   15f13364b0ca   2 years ago        135MB
+<none>                                                        <none>                                   9fdf7c336230   2 years ago        135MB
+<none>                                                        <none>                                   57e987757eb5   2 years ago        135MB
+<none>                                                        <none>                                   c1fa942dab3e   2 years ago        135MB
+<none>                                                        <none>                                   039babb7135f   2 years ago        135MB
+<none>                                                        <none>                                   8b9f3076c6dc   2 years ago        135MB
+<none>                                                        <none>                                   8ec9ccd8830e   2 years ago        135MB
+<none>                                                        <none>                                   a184d026d495   2 years ago        135MB
+dockerfileubuntu                                              16.04                                    46b6402f6564   2 years ago      135MB
+
+
+#####Dockerfile - use of cache
+#Now if we again run the above docker file everything will be picked from cache. We can see the same in below output om running command run "docker image build -t dockerfileubuntu:16.04 .":
+[+] Building 2.1s (14/14) FINISHED                                                                                                                          docker:default
+ => [internal] load .dockerignore                                                                                                                                     0.0s
+ => => transferring context: 2B                                                                                                                                       0.0s
+ => [internal] load build definition from Dockerfile                                                                                                                  0.0s
+ => => transferring dockerfile: 312B                                                                                                                                  0.0s
+ => [internal] load metadata for docker.io/library/ubuntu:16.04                                                                                                       2.1s
+ => [ 1/10] FROM docker.io/library/ubuntu:16.04@sha256:1f1a2d56de1d604801a9671f301190704c25d604a416f59e03c04f5c6ffee0d6                                               0.0s
+ => CACHED [ 2/10] RUN apt-get update && apt-get install -y tree                                                                                                      0.0s
+ => CACHED [ 3/10] RUN touch /tmp/1.txt                                                                                                                               0.0s
+ => CACHED [ 4/10] RUN touch /tmp/2.txt                                                                                                                               0.0s
+ => CACHED [ 5/10] RUN touch /tmp/3.txt                                                                                                                               0.0s
+ => CACHED [ 6/10] RUN touch /tmp/4.txt                                                                                                                               0.0s
+ => CACHED [ 7/10] RUN echo "My name is Jaspreet"                                                                                                                     0.0s
+ => CACHED [ 8/10] RUN echo "My name is Jaspreet"                                                                                                                     0.0s
+ => CACHED [ 9/10] RUN echo "My name is Jaspreet"                                                                                                                     0.0s
+ => CACHED [10/10] RUN echo "My name is Jaspreet"                                                                                                                     0.0s
+ => exporting to image                                                                                                                                                0.0s
+ => => exporting layers                                                                                                                                               0.0s
+ => => writing image sha256:eb4a7adc22a0321e9ec628bb5bd64a8e18e7861eda42942b21efe522ce36d8d5                                                                          0.0s
+ => => naming to docker.io/library/dockerfileubuntu:16.04        
+
+
+#####Dockerfile - when cache will not work 
+#If we add any new line/step in above Dockerfile then all steps after it will not be picked up from cache and will be executed in real time.
+FROM  ubuntu:16.04
+RUN touch /tmp/5.txt   --> We have added it new, now even if we again run Dockerfile below steps will not be executed from Cache and will run in real time.
+RUN apt-get update && apt-get install -y tree
+RUN touch /tmp/1.txt
+RUN touch /tmp/2.txt
+RUN touch /tmp/3.txt
+RUN touch /tmp/4.txt
+RUN echo "My name is Jaspreet"
+RUN echo "My name is Jaspreet"
+RUN echo "My name is Jaspreet"
+RUN echo "My name is Jaspreet"
+
+

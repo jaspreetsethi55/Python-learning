@@ -1,0 +1,52 @@
+#####Container export
+"docker container export container-id/id-prefix > output_image_file.tar"
+"docker container export container-id/id-prefix -o output_image_file.tar"
+
+Let us say we have made a container with ubuntu image and installed certain stuff in it(e.g. tree and git), then we can make a tar of our container via export command and then give this tar to anyone, so that that they directly use our tar(via importing) and eventually don't have to install any tree/git command.
+
+E.g. Build a ubuntu container with going inside it and installing tree and git command in it:
+
+jaspreet@NO2NEXXISCAREVM1:~$ docker container run -it ubuntu /bin/bash
+root@2885915fd20d:/# apt-get update
+...
+...
+root@2885915fd20d:/# apt-get install tree git
+...
+...
+
+Now come out of container via "ctrl + p + q" -- This will take us out of the container without stopping it i.e. container will keep on running.
+
+
+Now build a tar of this container via using "export" command:
+"docker container export 2885915fd20d > ubuntu_git_tree.tar"
+
+
+#######import container from tar file
+"docker image import tar_filename image_name"
+
+Above we have made a tar file of ubuntu container having git and tree command installed in it. Now, to import it back to image we can use import command as below:
+"docker image import ubuntu_git_tree.tar my_ubuntu_with_tree_git"
+
+now, if we do "docker image ls" we will see this new image "my_ubuntu_with_tree_git" there i.e. now our docker host is having this image. Now we can run the container of this via below:
+"docker container run -it my_ubuntu_with_tree_git /bin/bash"
+
+now, our this new container will already have tree and git commands installed in it.
+
+
+#######import container from running container - commit
+"docker container commit --author 'author_name' -m 'message' container-id/id-prefix new_output_image_name"
+
+Let us say we have a running container and we installed certain softwares or write any files in it, now if directly want want to create a image out of that running container, then we can use "commit" command. Once this image is created then we can directly use that image and it will have desired softwares/file already in it.
+
+E.g. Build an ubuntu container with and touch some file in it
+jaspreet@NO2NEXXISCAREVM1:~$ docker container run -it ubuntu /bin/bash
+root@2885915fd20d:/# cd /tmp
+root@2885915fd20d:/# touch 1 2 3 4 5 6 7 8 9
+
+Now come out of container via "ctrl + p + q" -- This will take us out of the container without stopping it i.e. container will keep on running.
+
+Now, creating image from this running container:
+"docker container commit --author 'Jaspreet Sethi' -m 'This is test commit' 2885915fd20d my_ubuntu_with_file"
+
+now, if we do "docker image ls" we will see this new image "my_ubuntu_with_file" there i.e. now our docker host is having this image. Now we can run the container of this via below:
+"docker container run -it my_ubuntu_with_file /bin/bash"

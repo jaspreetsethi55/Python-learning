@@ -1,0 +1,61 @@
+#########Entrypoint
+'''
+ENTRYPOINT is one of the many instructions you can write in a dockerfile. The ENTRYPOINT instruction is used to configure the executables that will always run after the container is initiated. For example, you can mention a script to run as soon as the container is started. Note that the ENTRYPOINT commands cannot be overridden or ignored, even when you run the container with command line arguments.
+
+Docker ENTRYPOINT instructions can be written in both shell and exec forms, such as the following example below:
+
+• Shell form: ENTRYPOINT node app.js • Exec form: ENTRYPOINT ["node", "app.js"]
+'''
+
+
+#Sample Dockerfile - build it via "docker image build -t testsshubuntu:16.04 ."
+FROM  ubuntu:16.04
+ENV NAME Jaspreet
+ENV PASS Jas@123
+RUN mkdir -p /var/run/sshd
+RUN apt-get update
+RUN apt-get install -y python tree
+ENTRYPOINT ["tree""]
+
+
+#Connecting to above dockerfile container via ssh:
+#Build above docker file via "docker image build -t testsshubuntu:16.04  ."
+#Run container in "docker container run -P -it testsshubuntu:16.04"
+
+We will see that tree command is directly executed when the container is run.
+
+#################Entrypoint with cmd
+#If we use CMD after ENTRYPOINT, then  
+
+#Sample Dockerfile - build it via "docker image build -t testsshubuntu:16.04 ."
+FROM  ubuntu:16.04
+ENV NAME Jaspreet
+ENV PASS Jas@123
+RUN mkdir -p /var/run/sshd
+RUN apt-get update
+RUN apt-get install -y python tree
+ENTRYPOINT ["tree"]
+CMD ["--version"]
+
+In this case "tree --version" command will get executed when we build and run the container i.e. once container is initiatd, tree command is there but since CMD is also having --version, so tree command actually converts to "tree --version"
+
+
+#################Running script via Entrypoint and passing Arguments to it
+#Let us say we want to tun below shell script(save it as test.sh) in Entrypoint:
+echo "My name is $1"
+
+#Sample Dockerfile - build it via "docker image build -t testsshubuntu:16.04 ."
+FROM  ubuntu:16.04
+ENV NAME Jaspreet
+ENV PASS Jas@123
+RUN mkdir -p /var/run/sshd
+RUN apt-get update
+RUN apt-get install -y python tree
+COPY test.sh /tmp/
+ENTRYPOINT ["/tmp/test.sh"]
+ENTRYPOINT ["test.sh"]
+
+Once we build this and the run it as follows:
+"docker container run -P -it testsshubuntu:16.04 Jaspreet" 
+Then this "Jaspreet" will be passed as an argument to test.sh and we will get below output as "My name is Jaspreet"
+

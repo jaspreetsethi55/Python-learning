@@ -1,0 +1,57 @@
+#####run vs create vs pull vs start
+The docker "run" command first "pull" a image from docker hub if its not present in dokcer host and then "creates" a writeable container layer over the specified image, and then "starts" it using the specified command. A stopped container can be restarted with all its previous changes intact using docker start. See docker ps -a to view a list of all containers.
+
+######docker hub login
+hub.docker.com is docker default hub/repo, where all images are pulled from(we can also build our custom repo, we'll study ahead). 
+We can create our account on this and use our username/password on linux to login on it via below command(so as to push images):
+"docker login"
+This will prompt us for user/pass
+
+on hub.docker.com we can found all official images as well as images put via members like us.
+
+#######docker pull 
+"docker pull image_name"
+
+"pull" command will pull/download the image from docker hub and make it available to docker host on our linux system.
+
+E.g. "docker pull ubuntu"
+by default latest ubuntu image will be pulled, we can check this under "tag" column via doing "docker image ls"
+
+#######docker pull specfic image version/tag 
+"docker image pull image_name:version"
+"docker pull image_name:version"
+"docker image pull image_name:tag"
+"docker pull image_name:tag"
+
+If we'll see on hub.docker.com, we can see below versions, we can use any of the tags to download the specfic image:
+20.04, focal-20230801, focal
+22.04, jammy-20230816, jammy, latest
+23.04, lunar-20230816, lunar, rolling
+23.10, mantic-20230912, mantic, devel
+
+All below commands will download the same image:
+E.g. "docker pull ubuntu:20.04"
+E.g. "docker pull ubuntu:focal"
+E.g. "docker pull ubuntu:focal-20230801"
+
+
+#######docker image tag
+"docker image tag repo-url/accountname/imagename"
+Note: we can skip "repo-url/", if we are pushing it to default dokcer repo i.e. hub.docker.com
+
+A Docker tag provides a unique identity to a Docker image. There are sets of similar images with different versions identified by tags in a Docker repository
+
+E.g. "docker image tag my_ubuntu_tree_git jaspreet5875/my_ubuntu_t_r"
+now, if we do "docker image ls", then we'll hvae both images "my_ubuntu_tree_git" as well as "jaspreet5875/my_ubuntu_t_r" with same image id coz we have tagged them(similar to linking files in liunx). SO even if we delete image "my_ubuntu_tree_git", even then other image will remain intact. This is known as image dangling.
+
+
+#######docker image push
+We can push images to hub.docker.com(be default it pushes here) 
+
+1. tag image as above
+2. "docker login" and give user/pass
+3. "docker push repo-url/accountname/imagename" or "docker image push epo-url/accountname/imagename"
+E.g. "docker push jaspreet5875/my_ubuntu_t_r" - This will push our image to hub.docker.com and it can be used publically
+
+
+now, anything can use this image via "docker pull jaspreet5875/my_ubuntu_t_r"

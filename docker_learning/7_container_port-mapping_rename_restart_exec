@@ -1,0 +1,43 @@
+#####Providing a container name when creating container
+"docker container run --name container-name image-name"
+
+E.g. docker container run -d --name test_web nginx  -- This will create a nginx container with name 'test_web' and run it in background
+
+
+#####Renaming a running container
+"docker container rename container-new-name container-id/id-prefix"
+
+E.g. docker container rename test_web2 ba0
+
+
+######Docker port mapping
+if we need to access docker port outside the virtual machine where docker is running, we can do port mapping
+
+E.g. we ran nginx via docker(e.g. docker nginx IP: 172.71.23.1) and we want to access it from outside world
+
+port mapping:
+docker(linux-ip):linux-port ---> container:port
+docker(linux-ip):3600 --> container:80
+10.98.0.167:3600 --> 172.71.23.1:80
+
+"docker container run -p linux-port:container-port image-name"
+
+E.g. docker container run -d -p 3600:80 --name test_web nginx
+  
+Now, we directly access our docker port 80(172.71.23.1:80) via using linux-ip:3600(10.98.0.167:3600) from outside world i.e. any request coming to 10.98.0.167:3600 will be redirected to 172.71.23.1:80
+
+
+#####Going inside running container
+"docker containter exec -it container-id/name/id-prefix command"
+
+E.g. docker container exec -it ba0 /bin/bash  -- This will take us to container(starting with id ba0) /bin/bash shell(similar to SSH connection to any linux-machine) & now we can install/un-install anything on it via directly running commands.
+
+
+######Re-starting any container
+"docker container restart container-id/name/id-prefix command"
+
+
+
+
+
+
