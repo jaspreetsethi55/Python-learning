@@ -41,7 +41,8 @@ A = np.arange(0,9).reshape(3,3)
  [6 7 8]]
 '''
 
-B = np.ones((3,3))
+#B = np.ones((3,3))
+B = np.arange(0,9).reshape(3,3)
 '''
 [[1. 1. 1.]
  [1. 1. 1.]
@@ -55,6 +56,8 @@ print(A + B)
 '''
 
 
+print("dot")
+print(np.dot(A,B))
 #############matrix product
 '''
 dot() function is use to calculate matrix product.

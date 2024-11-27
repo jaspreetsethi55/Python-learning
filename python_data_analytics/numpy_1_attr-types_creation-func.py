@@ -57,6 +57,10 @@ b = np.array([[1,2,3], #multi dimensional - 2 dimensional
              [4,5,6],
              [7,8,9]])
 
+b1 = np.array([[1,2], #multi dimensional - 2 dimensional
+             [4,5,6],
+             [7,8,9]])
+
 c = np.array([[1.1,2.1,3.1], #multi dimensional - 2 dimensional
              [4.2,5.1,6.3],
              [7.1,8.4,9.8],
@@ -76,11 +80,13 @@ print(c.dtype) ##float64
 
 print(a.shape) #(3,) or (3,1) -both are samething ##length of array is 3
 print(b.shape) #(3,3) 
+print(b1.shape) #(3,) ##For numpy, length of each arrays should be same, since that is not the case here so, we are not getting (3,) in stead of (3,3)
 print(c.shape) #(4,3) ##length of array is 4 and each array size is 3
 print(d.shape) #(2,2,2)
 
 print(a.ndim) #1 so rank is 1
 print(b.ndim) #2 so rank is 2
+print(b1.ndim) #1 so rank is 1  ##For numpy, length of each internal array should be same. Here it will become one-dimensional array that stores references to lists, which                                ##means that you will lose most of the benefits of Numpy (vector processing, locality, slicing, etc.).
 print(c.ndim) #2 so rank is 2
 print(d.ndim) #3 so rank is 3
 
@@ -125,6 +131,7 @@ default dtype is float64. E.g. np.zeroes((3,3))
 ones():
 will create full numpy array of one's with dimensions defined by shape argument.
 default dtype is float64. E.g. np.ones((3,3))
+E.g. np.ones((3,3), dtype = "int64")
 
 arange():
 generate numpy arrays with numerical sequences based on the passed arguments.
@@ -158,6 +165,15 @@ print(zeroes)
  [0. 0. 0.]
  [0. 0. 0.]]
 '''
+
+zeroes = np.zeros((3,3), dtype = "int64")
+print(zeroes)
+''''
+[[0 0 0]
+ [0 0 0]
+ [0 0 0]]
+'''
+
 
 ones = np.ones((3,3))
 print(ones)
