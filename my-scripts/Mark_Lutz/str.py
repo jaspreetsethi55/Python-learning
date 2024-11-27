@@ -103,14 +103,22 @@ print(var.startswith('he')) #False
 
 
 ##stripping##
-#strip - remove spaces from both side, starting and ending
-#lstrip - remove spaces from starting(left side)
-#rstrip - remove spaces from endinf(right side)
+#strip - remove spaces(by default) or characters provided from both side, starting and ending
+#lstrip - remove spaces(by default) or characters provided from starting(left side)
+#rstrip - remove spaces(by default) or characters provided from ending(right side)
 
 var = '     :Hello     world :   '
 print(var.strip()) #:Hello     world :
 print(',' + var.lstrip() + ',') #,:Hello     world :   ,
 print(var.rstrip()) #     :Hello     world :
+
+var = '     :Hello     world:'
+print(var.strip(" :d")) #Removes " ", ":" or "d" from start and end of string. 
+#Hello     worl
+
+print(',' + var.lstrip(" :") + ',') #,Hello     world:,
+print(var.rstrip("H:")) #     :Hello     world
+
 
 #######Index -- starts from 0
 #######Indexing -- str[start:end] - give all element from start to end-1 i.e. not including end
@@ -127,8 +135,38 @@ last_index = len(var)-1
 last_char2 = var[last_index]
 print(last_char2) #d
 
-var_substring = var[6:11]
+var_substring = var[6:11] #from 6th to 10th position
 print(var_substring) #World
 
-var_substring2 = var[6:] 
+var_substring2 = var[6:] #from 6th to last position
 print(var_substring2) #World
+
+##Every nth character
+#s[x:y:n] -- will give every nth character from position x to y-1
+print(var[1:9:2]) #will give every 2nd character from o to 9
+#el o
+
+
+#########Splitting and partition
+#s.split(delimeter,[maxsplit]) -- split with delemiter. maxslpit is optional.
+#s.rsplit(delimeter,[maxsplit]) #split from end
+#s.partition()
+#s.rpartiton()
+
+s = "a:b:c:d:e"
+print(s.split(":")) #['a', 'b', 'c', 'd', 'e']
+print(s.split(":",2)) #['a', 'b', 'c:d:e']
+print(s.split(":",1)) #['a', 'b:c:d:e']
+
+print(s.rsplit(":")) #['a', 'b', 'c', 'd', 'e']
+print(s.rsplit(":",2)) #['a:b:c', 'd', 'e']
+
+#####Replacing String
+#s.replace(substr, replace_string, number_of_occurance_to_replace)  -- if number_of_occurance_to_replace not given then replaces all occurances
+#Doesn't replaces the original string "s"
+s = "a:b:b:d:e"
+print(s.replace("a","z")) #z:b:b:d:e
+print(s) #a:b:b:d:e
+
+print(s.replace("b","y",1)) #a:y:b:d:e
+print(s) #a:b:b:d:e
