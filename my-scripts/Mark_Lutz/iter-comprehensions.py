@@ -7,7 +7,7 @@
 ####Iteration tool/context - These help us to iterate(loop) around iterable/iterator. E.g. for, comprehension, map,etc
 
 ##map, zip, generators, etc are iteration tool as well as iterables
-##map,zip,filter, enumerate are iterables as well as iterataors i.e. they are their own iterators(returning themselves for iter() call thus we don't have to neccesarilly use 'iter' on them and instead can directly use 'next'
+##map,zip,filter, enumerate,fileobjects are iterables as well as iterataors i.e. they are their own iterators(returning themselves for iter() call thus we don't have to neccesarilly use 'iter' on them and instead can directly use 'next'
 
 #Actually technically in backgroud, for/while loop works on iter concept only
 #In pyhton 2.x we have X.next() and it Python 3.x we have X.__next__()

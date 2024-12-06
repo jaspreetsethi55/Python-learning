@@ -19,6 +19,9 @@ print(range_list,end='\n\n')
 print("******Accessing Lists******")
 print(num)
 print("num[0]:",num[0])
+print("num[4]:","This will give index out of range error because list is only from 0 to 3 index")
+print("num[2:4]:",num[2:4], "This dosen't give error, although 4 index is not there because in case target range is greater then length it takes only up to last element")
+
 print("num[0:1]:",num[0:1])
 
 print("num[0:2]",num[0:2])
