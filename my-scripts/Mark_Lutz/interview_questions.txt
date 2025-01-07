@@ -1,0 +1,70 @@
+##############################################     NTT-DATA/SAP Contract     #################################
+--------Question:1
+Design a oops class framework, so that a user can upload a file to any cloud(AWS,Azure,GCP) 
+
+--Answer
+#package side
+class AWS:
+	
+	def upload():
+	
+class Azure:
+	pass
+	
+class Gcp:
+	pass
+
+class CloudUploud(AWS,Azure,GCP):
+
+	def __init__(self,cloudname):
+		self.cloudname = cloudname
+		
+	def
+	
+	
+#user side:
+import CloudUploud
+
+	connection_details = {}
+	uploadObj = CloudUploud(nameOfCloud,connection_details) #AWS
+	uploadObj.upload(file) #s3
+	
+	
+--------Question:2 
+Reverse a string without inbuilr reverse function
+jaspreet 
+=>
+teerpsaj
+
+
+#way:1 s[::-1]
+
+#way:2
+s="jaspreet"
+rev_s = []
+for i in range(len(s),-1):
+	rev_s.append(s[i])
+
+print("".join(rev_s))
+
+--------Question:3 
+Reverse a string by making recursive function
+jaspreet 
+=>
+teerpsaj
+
+
+t jaspree
+te jaspre
+tee jaspre
+
+def recursive_string(l, rev_s = []):
+	rev_s.append(l[-1])
+	if len(l) == 1:
+		return rev_s
+	else:
+		l.pop()
+		return recursive_string(l,rev_s)
+		
+l = list(s)
+	

@@ -13,7 +13,7 @@ They are also passed by object reference, but they can be changed in place in th
 '''
 
 def student_name(name): 
-  '''let's have a look at the string(immutable) variables. The parameter inside of the function remains a reference to the arguments variable, as long as the parameter   is not changed. As soon as a new value will be assigned to it, Python creates a separate local variable. The caller's variable will not be changed this way.
+  '''let's have a look at the string(immutable) variables. The parameter inside of the function remains a reference to the arguments variable, as long as the parameter is not changed. As soon as a new value will be assigned to it, Python creates a separate local variable. The caller's variable will not be changed this way.
   Also, when talking about scope, each function run has its own set of local varibles i.e. variables inside any function are local to that function or any function enclosed in that function and they live only the time function is running. In case outside code need to use any of these local variabke, we need to use 'global'
   '''
   

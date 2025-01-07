@@ -21,7 +21,7 @@ def student(lname,lage): ##Local variable
     ##Accessing Global variable
     print("Acessing Global variable:{} {}".format(name,age))
 
-    '''Although above line will print the globle variable 'name' but will still give below warning:
+    '''Although above line will print the globle variable 'name' but will still give below warning(error in python 3.7 and above):
      SyntaxWarning: name 'name' is used prior to global declaration
        global name
 

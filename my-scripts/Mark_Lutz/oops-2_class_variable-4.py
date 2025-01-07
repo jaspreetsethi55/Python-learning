@@ -47,3 +47,16 @@ emp1.raise_sal()
 
 print(Employee.__dict__)
 print(emp1.pay)
+
+'''
+250000
+{'__module__': '__main__', 'raise_pay': 1.04, '__init__': <function Employee.__init__ at 0x7539a6dd0f80>, 'fullname': <function Employee.fullname at 0x7539a6dd0e60>, 'raise_sal': <function Employee.raise_sal at 0x7539a6dd0b90>, '__dict__': <attribute '__dict__' of 'Employee' objects>, '__weakref__': <attribute '__weakref__' of 'Employee' objects>, '__doc__': None}
+{'name': 'jaspreet', 'lname': 'sethi', 'age': 30, 'pay': 250000, 'email': 'jaspreet.sethi@company.com'}
+1.04
+{'name': 'jaspreet', 'lname': 'sethi', 'age': 30, 'pay': 250000, 'email': 'jaspreet.sethi@company.com'}
+{'name': 'jaspreet', 'lname': 'sethi', 'age': 30, 'pay': 250000, 'email': 'jaspreet.sethi@company.com', 'raise_pay': 5}
+5
+{'name': 'jaspreet', 'lname': 'sethi', 'age': 30, 'pay': 250000, 'email': 'jaspreet.sethi@company.com', 'raise_pay': 5}
+{'__module__': '__main__', 'raise_pay': 1.04, '__init__': <function Employee.__init__ at 0x7539a6dd0f80>, 'fullname': <function Employee.fullname at 0x7539a6dd0e60>, 'raise_sal': <function Employee.raise_sal at 0x7539a6dd0b90>, '__dict__': <attribute '__dict__' of 'Employee' objects>, '__weakref__': <attribute '__weakref__' of 'Employee' objects>, '__doc__': None}
+1250000
+'''

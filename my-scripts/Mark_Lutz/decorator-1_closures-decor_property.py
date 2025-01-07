@@ -72,7 +72,7 @@ decor_func() #This is original function
 ########decorator property form i.e. @decorator form################
 def decorator_function(org_func):  ##Decorators accepts function as an argument
     def wrapper_function():
-        print("This is new functionlity added to {} without changing it".format(original_function.__name__))
+        print("This is new functionlity added to {} without changing it".format(org_func.__name__))
         return org_func() ##adds some kind of functionality and then returns another function
 
     return wrapper_function ##return inner function object
